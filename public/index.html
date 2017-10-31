@@ -7,24 +7,20 @@
     <script defer src="/bundle.js"></script>
 
 		<style type = "text/css">
-		            div#mp3_player{ width: 500px; height: 60px; background: #000; padding: 5px; margin: 50px auto;}
-		        div#mp3_player > div > audio{ width: 500px; background: #000; position: absolute; }
-		/*        div#mp3_player > canvas { width: 500px; height: 30px; background: #002D3C; float: left;}
-		*/        canvas { width: 1024px; height: 275px; background: black; position:absolute g; padding: 25px;}
-		/*         #display { width: 1074px; height: 300px; background: black; }
-		*/         /*background: #002D3C;*/
-		        h1 {
-		            font-size: 74px;
-		/*            position: absolute;
-		*/            left: 400px;
-            align: "center";
+        div#mp3_player{ width: 500px; height: 60px; background: #000; padding: 5px; margin: 50px auto;}
+        div#mp3_player > div > audio{ width: 500px; background: #000; position: absolute; }
+       	canvas { width: 1024px; height: 275px; background: black; position:absolute g; padding: 15px;}
+        h1 {
+          font-size: 74px;
+      		left: 400px;
+        	align: "center";
         }
     </style>
 
     <script>
 	    //create new instance of audio 
 	    var audio = new Audio();
-	               audio.crossOrigin = "anonymous";
+      audio.crossOrigin = "anonymous";
       audio.src = '../sampleMusic/Fullstack_Cap2.mp3';
       //audio.src = '../sampleMusic/LongTestTones.mp3';
 
@@ -40,38 +36,22 @@
 	    function frameLooper(){
 	        window.requestAnimationFrame(frameLooper);
 	        fbc_array = new Uint8Array(analyser.frequencyBinCount);
-	        // if (show < 120) {
-	        // 	show++
-	        // } else {
-	        // 	show = 0;
-	        //   // console.log('fbc_array:', fbc_array)
-	        // }
 	        const sampleRate = context.sampleRate; 
-	  
 	        analyser.getByteFrequencyData(fbc_array);
-
-
 	        ctx.clearRect(0, 0, canvas.width, canvas.height);
 	        ctx.fillStyle = "#ffff00";
 	        var bytes = 1024;
 	        // samples = 1024;
 	        for (var i = 1; i < bytes; i++ ){
-	        	
               bar_height = -(fbc_array[i]/2);
-              // bar_x = i * 10;
               bar_width = 2;
               bar_x = 0;
               const barxWidth = 3;
-              // const sigBytes = [2,4,7,14,27,53,106,211,422,843];
-              // const sigBytes = [ 2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,19,21,22,24,26,27,30,33,37,40,43,47,50,53,59,66,72,79,86,92,99,106,119,132,145,159,172,185,198,211,237,263,290,316,342,369,395,422,474,527,580,633,685,738,791,843,948 ];
-              const sigBytes = [ 2,3,4,5,6,7,8,9,10, 11, 12,13,14,15,16, 17, 18,19,20,21,22,24,25, 26,27,29,31,33,35,37,39,42,44,46,48,50,52,53,57,61,65,69,74,78,82,  86,91,95,99,103,106,114,122,131,139,148,156,165,173,182,190,199,207,211,227,244,261,278,295,312,329,346,362,379,396,413,422,455,489,523,557,590,624,658,692,725,759,793,827,843,910,977]
+              const sigBytes = [ 2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,24,25, 26,27,29,31,33,35,37,39,42,44,46,48,50,52,53,57,61,65,69,74,78,82,86,91,95,99,103,106,114,122,131,139,148,156,165,173,182,190,199,207,211,227,244,261,278,295,312,329,346,362,379,396,413,422,455,489,523,557,590,624,658,692,725,759,793,827,843,910,977]
               const newArr = [];
               sigBytes.forEach((byteNum) => {
               	newArr.push(Math.floor(byteNum ))
               })
-
-              // console.log("newArr:", newArr)
-
               newArr.forEach((freq, index)=> {
               	if (i === freq){
               		bar_x = barxWidth * (index + 1);
@@ -114,12 +94,13 @@
 
   </head>
   <body>
-    <div id="app"></div>
+    <div></div>
+    <h1 align="center">Master Your Music</h1>
     
     <div id = "mp3_player">
         <div id = "audio_box"></div>
     </div>
-    <div id="display" align="center">
+    <div classid="display" align="center">
         <canvas id = "analyser_render"></canvas>
     </div>
 
